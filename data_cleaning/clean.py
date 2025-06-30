@@ -19,12 +19,8 @@ def clean_data(file: str) -> DataFrame:
              .appName("nyc_taxi_etl")
              .getOrCreate())
 
-    # load data file
-    root_dir = Path(__file__).resolve().parents[1]
-    data_file = f"{root_dir}/data/yellow_tripdata_2024-01.parquet"
-
     # create dataframe
-    df = spark.read.parquet(data_file, header=True, inferSchema=True)
+    df = spark.read.parquet(file, header=True, inferSchema=True)
 
     # drop rows with missing value
     no_na_filter = " AND ".join([f"{c} is NOT NULL" for c in df.columns])

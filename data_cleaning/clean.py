@@ -1,5 +1,4 @@
 from pyspark.sql import SparkSession, DataFrame
-from pathlib import Path
 from pyspark.sql.functions import col
 from functools import reduce
 from operator import and_

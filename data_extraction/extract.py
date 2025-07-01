@@ -19,7 +19,3 @@ def extract():
         print(f"file saved to {file_path} succesfully.")
     except Exception as e:
         print(e)
-
-
-if __name__ == "__main__":
-    extract()

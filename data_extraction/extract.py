@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 
 
-def main():
+def extract():
     try:
         url = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"
         print(f"extracting file from {url}...")
@@ -22,4 +22,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    extract()

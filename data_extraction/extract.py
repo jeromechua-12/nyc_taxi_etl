@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 
 
-def extract():
+def extract_data() -> str | None:
     try:
         url = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"
         print(f"extracting file from {url}...")
@@ -17,5 +17,6 @@ def extract():
         with open(file_path, "wb") as f:
             f.write(response.content)
         print(f"file saved to {file_path} succesfully.")
+        return file_path
     except Exception as e:
         print(e)

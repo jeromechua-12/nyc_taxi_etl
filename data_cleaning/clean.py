@@ -14,9 +14,9 @@ def clean_data(file: str) -> DataFrame:
         DataFrame: cleaned dataframe.
     '''
     # create spark session 
-    spark = (SparkSession.builder
-             .appName("nyc_taxi_etl")
-             .getOrCreate())
+    spark = SparkSession.builder\
+        .appName("data_cleaning")\
+        .getOrCreate()
 
     # create dataframe
     df = spark.read.parquet(file, header=True, inferSchema=True)
@@ -32,4 +32,5 @@ def clean_data(file: str) -> DataFrame:
                          'congestion_surcharge', 'Airport_fee']
     no_negative_fare_filter = reduce(and_, [col(c) >= 0 for c in non_negative_cols])
     df_filtered = df_no_na.filter(no_negative_fare_filter)
+    spark.stop()
     return df_filtered

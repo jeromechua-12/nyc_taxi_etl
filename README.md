@@ -6,3 +6,5 @@ A project demostrating a ETL pipeline using [NYC Taxi dataset](https://www.nyc.g
 ### Tech Stack
 - Python
 - Apache Spark (PySpark)
+- Snowflake
+- Docker

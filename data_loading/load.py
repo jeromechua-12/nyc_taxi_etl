@@ -1,11 +1,21 @@
 import snowflake.connector
-from pyspark.sql import SparkSession, DataFrame
+from pyspark.sql import DataFrame
 from data_loading.config import SNOWFLAKE_USER, SNOWFLAKE_PWD, SNOWFLAKE_ACCOUNT,\
     SNOWFLAKE_WAREHOUSE, SNOWFLAKE_DATABASE, SNOWFLAKE_SCHEMA,\
     SNOWFLAKE_URL, SNOWFLAKE_ROLE
 
 
 def create_table() -> None:
+    '''
+    Build connection to snowflake and create a new table to store
+    NYC taxi data.
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    '''
     ctx = snowflake.connector.connect(
         user=SNOWFLAKE_USER,
         password=SNOWFLAKE_PWD,
@@ -49,9 +59,11 @@ def create_table() -> None:
 
 def insert_data(df: DataFrame) -> None:
     '''
-    Insert data of a dataframe to an existing table in snowflake database.
+    Insert rows of dataframe to an existing table in snowflake database.
+
     Parameters:
         df (DataFrame): dataframe containing data.
+
     Returns:
         None
     '''

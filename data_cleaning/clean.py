@@ -8,8 +8,10 @@ def _cast_type(df: DataFrame) -> DataFrame:
     '''
     Helper function to perform type casting on
     the columns of dataframe to intended types.
+
     Parameters:
         df (DataFrame): dataframe to perform type casting.
+
     Returns:
         DataFrame: Dataframe with new data types.
     '''
@@ -28,9 +30,10 @@ def _cast_type(df: DataFrame) -> DataFrame:
 def clean_data(df: DataFrame) -> DataFrame:
     '''
     Perform data cleaning and type casting on a dataframe. 
-    Returns the cleaned dataframe.
+
     Parameters:
         df (DataFrame): Dataframe to perform cleaning on. 
+
     Returns:
         DataFrame: cleaned dataframe.
     '''

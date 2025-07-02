@@ -4,6 +4,17 @@ import os
 
 
 def extract_data() -> str | None:
+    '''
+    Extract parquet file from NYC taxi trip record website
+    <https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page>.
+    and returns the path where the file is saved.
+
+    Parameters:
+        None
+
+    Returns:
+       str: absolute file path. 
+    '''
     try:
         url = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"
         print(f"extracting file from {url}...")

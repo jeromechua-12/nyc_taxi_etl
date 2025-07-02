@@ -17,16 +17,16 @@ def create_table() -> None:
     cs = ctx.cursor()
     create_query = """
     CREATE OR REPLACE TABLE nyc_yellow_taxi (
-        VendorID VARCHAR(1),
+        VendorID CHAR(1),
         tpep_pickup_datetime TIMESTAMPNTZ,
         tpep_dropoff_datetime TIMESTAMPNTZ,
         passenger_count INT,
         trip_distance DOUBLE,
         RatecodeID VARCHAR(2),
         store_and_fwd_flag CHAR(1),
-        PULocationID INT,
-        DOLocationID INT,
-        payment_type INT,
+        PULocationID VARCHAR(3),
+        DOLocationID VARCHAR(3),
+        payment_type CHAR(1),
         fare_amount DOUBLE,
         extra DOUBLE,
         mta_tax DOUBLE,
@@ -55,11 +55,8 @@ def insert_data(df: DataFrame) -> None:
     Returns:
         None
     '''
-    spark = SparkSession.builder\
-                .appName("snowflake_connection")\
-                .getOrCreate()
     sfOptions = {
-        "sfUrl": SNOWFLAKE_URL,
+        "sfURL": SNOWFLAKE_URL,
         "sfUser": SNOWFLAKE_USER,
         "sfPassword": SNOWFLAKE_PWD,
         "sfDatabase": SNOWFLAKE_DATABASE,
@@ -73,11 +70,11 @@ def insert_data(df: DataFrame) -> None:
         df.write\
             .format(SNOWFLAKE_SOURCE_NAME)\
             .options(**sfOptions)\
-            .option("dbtable", "nyc_yellow_taxi")\
+            .option("dbtable", "NYC_YELLOW_TAXI")\
             .option("truncate_table", "on")\
             .mode("overwrite")\
             .save()
         print("Rows inserted succesfully!")
     except Exception as e:
+        print("Failed to insert data.")
         print(e)
-    spark.stop()

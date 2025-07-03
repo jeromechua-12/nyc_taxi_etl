@@ -1,8 +1,20 @@
+# python
 .venv/
-.env
 **/__pycache__/
 **/artifacts/
+
+# environment
+.env
+.env.*
+*.env
+*.env.*
+
+# git
 .git/
 .gitignore
-.dockerignore
+
+# macOS
+.DS_Store
+
+# project related
 data/

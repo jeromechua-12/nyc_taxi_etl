@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf "/var/lib/apt/lists/*"
 
 # download and build python from source
-ENV PYTHON_VERSION=3.10.3
+ENV PYTHON_VERSION=3.10.18
 RUN wget "https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz" && \
     tar xzf "Python-${PYTHON_VERSION}.tgz" && \
     cd Python-${PYTHON_VERSION} && \

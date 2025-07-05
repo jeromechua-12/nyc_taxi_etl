@@ -1,19 +1,19 @@
 from pyspark.sql.types import StructType, StructField, \
-    CharType, VarcharType, IntegerType, DoubleType, \
+    StringType, IntegerType, DoubleType, \
     TimestampNTZType
 
 
 schema = StructType([
-    StructField("VendorID", CharType(1), True),
+    StructField("VendorID", StringType(), True),
     StructField("tpep_pickup_datetime", TimestampNTZType(), True),
     StructField("tpep_dropoff_datetime", TimestampNTZType(), True),
     StructField("passenger_count", IntegerType(), True),
     StructField("trip_distance", DoubleType(), True),
-    StructField("RatecodeID", VarcharType(2), True),
-    StructField("store_and_fwd_flag", CharType(1), True),
-    StructField("PULocationID", VarcharType(3), True),
-    StructField("DOLocationID", VarcharType(3), True),
-    StructField("payment_type", CharType(1), True),
+    StructField("RatecodeID", StringType(), True),
+    StructField("store_and_fwd_flag", StringType(), True),
+    StructField("PULocationID", StringType(), True),
+    StructField("DOLocationID", StringType(), True),
+    StructField("payment_type", StringType(), True),
     StructField("fare_amount", DoubleType(), True),
     StructField("extra", DoubleType(), True),
     StructField("mta_tax", DoubleType(), True),

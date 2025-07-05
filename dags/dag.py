@@ -26,15 +26,15 @@ with DAG(
     tags=["nyc_taxi", "etl"]
 ) as dag:
 
-    @task(task_id="extract raw data")
+    @task(task_id="extract-raw-data")
     def extract_task():
         extract()
 
-    @task(task_id="clean raw data")
+    @task(task_id="clean-raw-data")
     def clean_task():
         clean()
 
-    @task(task_id="load data into snowflake")
+    @task(task_id="load-data-into-snowflake")
     def load_task():
         load()
 

@@ -102,9 +102,9 @@ def load() -> None:
         None
     '''
     spark = SparkSession.builder \
-        .appname("loader") \
+        .appName("loader") \
         .config("spark.jars.packages",
-                "net.snowflake:snowflake-jdbc:3.13.22,net.snowflake:spark-snowflake_2.12:2.11.0-spark_3.3") \
+                "net.snowflake:snowflake-jdbc:3.13.30,net.snowflake:spark-snowflake_2.12:2.12.0-spark_3.4") \
         .getOrCreate()
 
     # get path to cleaned file

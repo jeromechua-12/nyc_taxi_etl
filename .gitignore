@@ -4,3 +4,6 @@
 **/artifacts/
 .git/
 data/
+config/
+logs/
+plugins/

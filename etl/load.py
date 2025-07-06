@@ -25,7 +25,7 @@ def _create_table() -> None:
     )
     cs = ctx.cursor()
     create_query = """
-    CREATE OR REPLACE TABLE nyc_yellow_taxi (
+    CREATE TABLE IF NOT EXISTS nyc_yellow_taxi (
         VendorID CHAR(1),
         tpep_pickup_datetime TIMESTAMP_NTZ,
         tpep_dropoff_datetime TIMESTAMP_NTZ,

@@ -15,12 +15,12 @@ from etl.load import load
     "nyc_taxi_dag",
     default_args={
         "depends_on_past": False,
-        "retries": 1,
+        "retries": 3,
         "retry_delay": timedelta(minutes=5),
     },
     description="DAG for NYC taxi ETL",
     start_date=datetime(2024, 1, 1),
-    end_date=datetime(2025, 1, 1),
+    end_date=datetime(2025, 5, 2),
     schedule="@monthly",
     catchup=True,
     tags=["nyc_taxi", "etl"]

@@ -28,7 +28,7 @@ Refer to [setup section](#setup) to configure for macOS.
 ## Airflow DAG
 - Schedule and automate ETL pipeline monthly from Jan 2024 till May 2025.
 - Perform backfill for missed months.
-- Dynamically use the execution month to scrape data from the web.
+- Dynamically use the execution year and month to scrape data from the web.
 
 
 ## Setup 

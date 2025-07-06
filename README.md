@@ -26,7 +26,7 @@ Refer to [setup section](#setup) to configure for macOS.
     - Insert rows from cleaned dataset into database
 
 ## Airflow DAG
-- Schedule and automate ETL pipeline monthly from Jan 2024 till May 2025 (No data beyond that).
+- Schedule and automate ETL pipeline monthly from Jan 2024 till May 2025.
 - Perform backfill for missed months.
 - Dynamically use the execution month to scrape data from the web.
 

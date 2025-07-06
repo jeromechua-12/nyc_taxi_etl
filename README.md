@@ -11,6 +11,8 @@ This project implements a simple ETL pipeline using [NYC Taxi dataset](https://w
 ⚠️ Not fully cross platform supported out of the box. Docker image is configured for amd64.
 Refer to [setup section](#setup) to configure for macOS.
 
+## ETL Process
+
 1. **Extract** 
     - Scrape and download monthly parquet files containing NYC Taxi Yellow data
     - Save parquet file to local storage for raw datasets

@@ -171,6 +171,9 @@ services:
         echo "Python version:"
         python --version
         echo
+        echo "Java version:"
+        java --version
+        echo
         echo "Airflow version:"
         airflow version
         echo

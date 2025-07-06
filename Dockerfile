@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tar \
     ca-certificates \
     && rm -rf "/var/lib/apt/lists/*"
-
+# NOTE: for macOS users, change amd64 in java_home path to arm64
 ENV JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64" \  
     PATH="$JAVA_HOME/bin:$PATH" \
     REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"

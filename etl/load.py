@@ -1,10 +1,9 @@
 import snowflake.connector
 from pyspark.sql import SparkSession, DataFrame
 from pathlib import Path
-from etl.config import SNOWFLAKE_USER, SNOWFLAKE_PWD, SNOWFLAKE_ACCOUNT,\
-    SNOWFLAKE_WAREHOUSE, SNOWFLAKE_DATABASE, SNOWFLAKE_SCHEMA,\
+from etl.config import SNOWFLAKE_USER, SNOWFLAKE_PWD, SNOWFLAKE_ACCOUNT, \
+    SNOWFLAKE_WAREHOUSE, SNOWFLAKE_DATABASE, SNOWFLAKE_SCHEMA, \
     SNOWFLAKE_URL, SNOWFLAKE_ROLE
-from etl.schema import schema
 
 
 def _create_table() -> None:
@@ -28,8 +27,8 @@ def _create_table() -> None:
     create_query = """
     CREATE OR REPLACE TABLE nyc_yellow_taxi (
         VendorID CHAR(1),
-        tpep_pickup_datetime TIMESTAMPNTZ,
-        tpep_dropoff_datetime TIMESTAMPNTZ,
+        tpep_pickup_datetime TIMESTAMP_NTZ,
+        tpep_dropoff_datetime TIMESTAMP_NTZ,
         passenger_count INT,
         trip_distance DOUBLE,
         RatecodeID VARCHAR(2),
@@ -80,10 +79,10 @@ def _insert_data(df: DataFrame) -> None:
     print("Inserting rows into table...")
     try:
         df.write\
-            .format(SNOWFLAKE_SOURCE_NAME)\
+            .format(SNOWFLAKE_SOURCE_NAME) \
             .options(**sfOptions)\
-            .option("dbtable", "NYC_YELLOW_TAXI")\
-            .mode("append")\
+            .option("dbtable", "NYC_YELLOW_TAXI") \
+            .mode("append") \
             .save()
         print("Rows inserted succesfully!")
     except Exception as e:
@@ -111,10 +110,7 @@ def load() -> None:
     cur_dir = Path.cwd()
     cleaned_file = f"{cur_dir}/data/cleaned/yellow_tripdata_2024-01_cleaned.parquet"
 
-    df = spark.read \
-        .option("header", True) \
-        .schema(schema) \
-        .parquet(cleaned_file)
+    df = spark.read.parquet(cleaned_file)
     _create_table()
     _insert_data(df)
     spark.stop()

@@ -1,16 +1,17 @@
 FROM apache/airflow:3.0.2-python3.10
 
 USER root 
-
 # java installation and config
 RUN apt-get update && apt-get install -y --no-install-recommends \
     openjdk-17-jdk \
     wget \
     tar \
+    ca-certificates \
     && rm -rf "/var/lib/apt/lists/*"
 
 ENV JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64" \  
-    PATH="$JAVA_HOME/bin:$PATH"
+    PATH="$JAVA_HOME/bin:$PATH" \
+    REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
 
 # spark installation and config
 ENV SPARK_VERSION=3.4.4
@@ -23,8 +24,6 @@ ENV SPARK_HOME="/opt/spark" \
     PATH="$SPARK_HOME/bin:$PATH"
 
 USER airflow
-
 COPY requirements.txt / 
-
 RUN pip install --no-cache-dir -r /requirements.txt
 

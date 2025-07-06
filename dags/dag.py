@@ -1,5 +1,4 @@
-from airflow import DAG
-from airflow.decorators import task
+from airflow.decorators import dag, task
 from datetime import datetime, timedelta
 from pathlib import Path
 import sys
@@ -12,7 +11,7 @@ from etl.clean import clean
 from etl.load import load
 
 
-with DAG(
+@dag(
     "nyc_taxi_dag",
     default_args={
         "depends_on_past": False,
@@ -20,22 +19,35 @@ with DAG(
         "retry_delay": timedelta(minutes=5),
     },
     description="DAG for NYC taxi ETL",
-    schedule="@monthly",
     start_date=datetime(2024, 1, 1),
-    catchup=False,
+    end_date=datetime(2025, 1, 1),
+    schedule="@monthly",
+    catchup=True,
     tags=["nyc_taxi", "etl"]
-) as dag:
+)
 
+def nyc_taxi_dag():
     @task(task_id="extract-raw-data")
-    def extract_task():
-        extract()
+    def extract_task(**context):
+        dt = context["logical_date"]
+        year = dt.year
+        month = dt.month
+        extract(year, month)
 
     @task(task_id="clean-raw-data")
-    def clean_task():
-        clean()
+    def clean_task(**context):
+        dt = context["logical_date"]
+        year = dt.year
+        month = dt.month
+        clean(year, month)
 
     @task(task_id="load-data-into-snowflake")
-    def load_task():
-        load()
+    def load_task(**context):
+        dt = context["logical_date"]
+        year = dt.year
+        month = dt.month
+        load(year, month)
 
     extract_task() >> clean_task() >> load_task()
+
+nyc_taxi_dag()

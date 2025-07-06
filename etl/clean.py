@@ -29,14 +29,15 @@ def _cast_type(df: DataFrame) -> DataFrame:
     return df.withColumns(mapping)
 
 
-def clean() -> None:
+def clean(year: int, month: int) -> None:
     '''
     Read raw data from local data folder
     and perform data cleaning on a dataframe.
     Store cleaned data in local data directory.
 
     Parameters:
-        None
+        year (int): year of data to clean.
+        month (int): month of data to clean.
 
     Returns:
         None
@@ -47,7 +48,7 @@ def clean() -> None:
 
     # get path to raw file
     cur_dir = Path.cwd()
-    raw_file = f"{cur_dir}/data/raw/yellow_tripdata_2024-01.parquet"
+    raw_file = f"{cur_dir}/data/raw/yellow_tripdata_{year}-{month:02d}.parquet"
 
     df = spark.read.parquet(raw_file)
     df_type_casted = _cast_type(df)
@@ -66,7 +67,7 @@ def clean() -> None:
     # create directory to store cleaned file
     cur_dir = Path.cwd()
     os.makedirs(f"{cur_dir}/data/cleaned", exist_ok=True)
-    file_path = f"{cur_dir}/data/cleaned/yellow_tripdata_2024-01_cleaned.parquet"
+    file_path = f"{cur_dir}/data/cleaned/yellow_tripdata_{year}-{month:02d}.parquet"
 
     # write cleaned parquet file
     df_filtered.write \

@@ -90,12 +90,13 @@ def _insert_data(df: DataFrame) -> None:
         print(e)
 
 
-def load() -> None:
+def load(year: int, month: int) -> None:
     '''
     Read cleaned parquet data and load the data into a snowflake database.
 
     Parameters:
-        None
+        year (int): year of data to load.
+        month (int): month of data to load.
 
     Return:
         None
@@ -108,7 +109,7 @@ def load() -> None:
 
     # get path to cleaned file
     cur_dir = Path.cwd()
-    cleaned_file = f"{cur_dir}/data/cleaned/yellow_tripdata_2024-01_cleaned.parquet"
+    cleaned_file = f"{cur_dir}/data/cleaned/yellow_tripdata_{year}-{month:02d}.parquet"
 
     df = spark.read.parquet(cleaned_file)
     _create_table()
